@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIH PS 26171 Specs & Benchmark Metrics - ISRO Prototype</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --primary: #0284c7;
+      --accent: #6366f1;
+      --text: #0f172a;
+      --subtext: #475569;
+      --border: #e2e8f0;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .brand-title { font-size: 18px; font-weight: 700; }
+    .brand-subtitle { font-size: 11px; color: var(--subtext); }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--subtext);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+
+    .badge-sih {
+      background-color: #e0f2fe;
+      color: var(--primary);
+      border: 1px solid #bae6fd;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    .card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .metrics-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+
+    .metrics-table th, .metrics-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .metrics-table th {
+      background-color: #f8fafc;
+      color: var(--subtext);
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .weight-badge {
+      background-color: #dbeafe;
+      color: #1e40af;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+    }
+
+    footer {
+      background-color: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 30px 24px;
+      margin-top: 60px;
+    }
+
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--subtext);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <div class="brand-logo">ISRO</div>
+        <div>
+          <div class="brand-title">Agentic AI Portal</div>
+          <div class="brand-subtitle">Indian Space Research Organisation</div>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="form.html">Confidential Form Portal</a></li>
+        <li><a href="metrics.html" class="active">SIH PS 26171 Specs</a></li>
+      </ul>
+
+      <span class="badge-sih">SIH 2026 PS 26171</span>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <div style="margin-bottom: 24px;">
+      <h1 style="margin: 0 0 6px 0; font-size: 26px; font-weight: 800;">SIH 26171 Evaluation Benchmark & Metrics</h1>
+      <p style="margin: 0; color: var(--subtext); font-size: 15px;">Official scoring weightages and technical implementation strategy for ISRO Problem Statement 26171.</p>
+    </div>
+
+    <div class="card">
+      <h2 style="font-size: 18px; margin: 0 0 16px 0;">Official SIH Evaluation Rubric</h2>
+      
+      <table class="metrics-table">
+        <thead>
+          <tr>
+            <th>Evaluation Metric</th>
+            <th>Scoring Weight</th>
+            <th>Technical Solution Strategy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Accuracy of Visual Context</strong></td>
+            <td><span class="weight-badge">25%</span></td>
+            <td>High-resolution screen state canvas capture with element coordinate mapping.</td>
+          </tr>
+          <tr>
+            <td><strong>2. Recall & Precision for Sensitive PII Data</strong></td>
+            <td><span class="weight-badge">20%</span></td>
+            <td>Dual inspection engine combining DOM attribute heuristics and regular expression parsing.</td>
+          </tr>
+          <tr>
+            <td><strong>3. Precision of Redaction</strong></td>
+            <td><span class="weight-badge">20%</span></td>
+            <td>Exact bounding box visual blackouts and semantic tag overlays (`[REDACTED_PASSWORD]`).</td>
+          </tr>
+          <tr>
+            <td><strong>4. Client-Side Resource Utilization</strong></td>
+            <td><span class="weight-badge">20%</span></td>
+            <td>Sub-15ms client processing latency utilizing native WebGL/Canvas APIs in Web Workers.</td>
+          </tr>
+          <tr>
+            <td><strong>5. End-to-End Latency of Task</strong></td>
+            <td><span class="weight-badge">15%</span></td>
+            <td>Compressed anonymized payloads optimized for fast transport to local or cloud VLMs.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2 style="font-size: 18px; margin: 0 0 12px 0;">ISRO Mentors & Contact Info</h2>
+      <p style="margin: 0 0 8px 0; font-size: 14px; color: var(--subtext);"><strong>Mentor 1:</strong> Gulshan Gupta (gulshang@sac.isro.gov.in)</p>
+      <p style="margin: 0; font-size: 14px; color: var(--subtext);"><strong>Mentor 2:</strong> Navita Jayesh Thakkar (navitat@sac.isro.gov.in)</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div>
+        <strong>ISRO Smart India Hackathon 2026</strong> | Problem Statement 26171
+      </div>
+      <div>
+        Client-Side Privacy Extension • FastAPI VLM Integration
+      </div>
+    </div>
+  </footer>
+
+  <script src="voice_agent.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "privacy-browser-agent",
+  "version": "1.0.0",
+  "description": "On-device Visual Perception and Privacy-Preserving Filter for Light-weight Browser Agents (ISRO SIH 26171)",
+  "scripts": {
+    "start-server": "cd server && python -m uvicorn main:app --reload --port 8000",
+    "start-demo": "npx http-server demo-app -p 3000"
+  },
+  "dependencies": {}
+}

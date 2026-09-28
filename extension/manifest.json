@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "ISRO Privacy-Preserving Browser Agent",
+  "version": "1.0",
+  "description": "On-device local visual perception & PII redaction for lightweight browser agents (SIH 26171)",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>",
+    "file:///*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icons/icon48.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>", "file:///*"],
+      "js": ["local_privacy_filter.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

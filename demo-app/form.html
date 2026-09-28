@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confidential Form Portal - ISRO SIH 26171 Benchmark</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --primary: #0284c7;
+      --primary-hover: #0369a1;
+      --accent: #6366f1;
+      --danger: #dc2626;
+      --success: #16a34a;
+      --text: #0f172a;
+      --subtext: #475569;
+      --border: #e2e8f0;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 16px;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .brand-subtitle {
+      font-size: 11px;
+      color: var(--subtext);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--subtext);
+      font-weight: 600;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--primary);
+    }
+
+    .badge-sih {
+      background-color: #e0f2fe;
+      color: var(--primary);
+      border: 1px solid #bae6fd;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    /* Grid Layout */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+    }
+
+    .card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0 0 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text);
+    }
+
+    /* Form Styling */
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      color: var(--subtext);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 11px 14px;
+      background-color: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      border: none;
+      border-radius: 8px;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 10px;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+      transition: all 0.2s;
+    }
+
+    .btn-submit:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+
+    /* PII Inspector Card */
+    .profile-box {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      background-color: #f8fafc;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .pii-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .pii-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid #f1f5f9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--subtext);
+    }
+
+    .pii-tag {
+      background-color: #fef2f2;
+      color: var(--danger);
+      border: 1px solid #fecaca;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    .guarantee-box {
+      margin-top: 20px;
+      padding: 14px;
+      background-color: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      font-size: 12px;
+      color: #1e40af;
+      line-height: 1.5;
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding-left: 15%;
+      z-index: 1000;
+    }
+
+    .modal-overlay.hidden {
+      display: none;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .modal-icon { font-size: 40px; margin-bottom: 12px; }
+    .modal-title { font-size: 18px; font-weight: 800; color: var(--text); margin: 0 0 8px 0; }
+    .modal-desc { font-size: 13px; color: var(--subtext); margin: 0 0 24px 0; }
+
+    .modal-btn {
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      color: #ffffff;
+      border: none;
+      padding: 12px 36px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 30px 24px;
+      margin-top: 60px;
+    }
+
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--subtext);
+    }
+
+    @media (max-width: 768px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .modal-overlay { justify-content: center; padding-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <div class="brand-logo">ISRO</div>
+        <div>
+          <div class="brand-title">Agentic AI Portal</div>
+          <div class="brand-subtitle">Indian Space Research Organisation</div>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="form.html" class="active">Confidential Form Portal</a></li>
+        <li><a href="metrics.html">SIH PS 26171 Specs</a></li>
+      </ul>
+
+      <span class="badge-sih">SIH 2026 PS 26171</span>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <div style="margin-bottom: 24px;">
+      <h1 style="margin: 0 0 6px 0; font-size: 24px; font-weight: 800;">Confidential Form Test Portal</h1>
+      <p style="margin: 0; color: var(--subtext); font-size: 14px;">Use the ISRO Privacy Agent extension on this page to test real-time on-device redaction and VLM execution.</p>
+    </div>
+
+    <!-- Main Grid: Form & PII Inspector -->
+    <div class="grid-2">
+      
+      <!-- Confidential Form -->
+      <div class="card">
+        <div class="card-title">
+          <span>🔒 Authentication & Financial Details</span>
+          <span style="font-size: 11px; color: var(--subtext);">Benchmark Form</span>
+        </div>
+
+        <form id="demoForm">
+          <div class="form-group">
+            <label for="username">User Account Email (PII)</label>
+            <input type="text" id="username" name="email" value="officer.isro@gov.in" required>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Account Security Password (SENSITIVE)</label>
+            <input type="password" id="password" name="password" value="SuperSecretPassword123!" required>
+          </div>
+
+          <div class="form-group">
+            <label for="cardNum">Credit Card Number (FINANCIAL PII)</label>
+            <input type="text" id="cardNum" name="card_number" autocomplete="cc-number" value="4532 8912 3456 7890" required>
+          </div>
+
+          <div class="form-group">
+            <label for="aadhaar">Government Aadhaar Identification Number</label>
+            <input type="text" id="aadhaar" name="aadhaar" value="9876 5432 1098" required>
+          </div>
+
+          <button type="submit" id="btnSubmitForm" class="btn-submit primary-action">Execute Autonomous Action</button>
+        </form>
+      </div>
+
+      <!-- User Profile & PII Inspector -->
+      <div class="card">
+        <div class="card-title">
+          <span>👤 User Identity & PII Rule Inspector</span>
+        </div>
+
+        <div class="profile-box">
+          <div class="avatar">ISRO</div>
+          <div>
+            <div style="font-weight: 700; font-size: 15px;">Dr. Vikram Sarabhai</div>
+            <div style="font-size: 12px; color: var(--subtext);">Senior Scientist • Department of Space</div>
+          </div>
+        </div>
+
+        <div style="font-size: 12px; font-weight: 700; color: var(--subtext); margin-bottom: 12px; text-transform: uppercase;">
+          Detected Sensitive DOM Elements (On-Device Scan)
+        </div>
+
+        <ul class="pii-list">
+          <li>
+            <span>Password Input (`#password`)</span>
+            <span class="pii-tag">REDACT: PASSWORD_FIELD</span>
+          </li>
+          <li>
+            <span>Payment Credentials (`#cardNum`)</span>
+            <span class="pii-tag">REDACT: FINANCIAL_PII</span>
+          </li>
+          <li>
+            <span>Government Aadhaar (`#aadhaar`)</span>
+            <span class="pii-tag">REDACT: GOVT_ID</span>
+          </li>
+          <li>
+            <span>User Account Email (`#username`)</span>
+            <span class="pii-tag">REDACT: EMAIL_PII</span>
+          </li>
+        </ul>
+
+        <div class="guarantee-box">
+          <strong>🛡️ Privacy Guarantee:</strong> The extension local privacy filter dynamically detects and redacts all confidential items on your client device before any screen state is sent to central VLM models.
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Modal Dialog Popup -->
+  <div id="modalOverlay" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-icon">✅</div>
+      <h3 class="modal-title">Form Action Triggered by Browser Agent!</h3>
+      <p class="modal-desc">
+        The autonomous VLM server received the sanitized screen state and safely executed the target form action. All passwords and PII were 100% masked on-device before transmission.
+      </p>
+      <button id="btnModalOk" class="modal-btn">OK</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div>
+        <strong>ISRO Smart India Hackathon 2026</strong> | Problem Statement 26171
+      </div>
+      <div>
+        Client-Side Privacy Extension • FastAPI VLM Integration
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const demoForm = document.getElementById('demoForm');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const btnModalOk = document.getElementById('btnModalOk');
+
+    demoForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      modalOverlay.classList.remove('hidden');
+    });
+
+    btnModalOk.addEventListener('click', function() {
+      modalOverlay.classList.add('hidden');
+      modalOverlay.style.display = 'none';
+    });
+  </script>
+  <script src="voice_agent.js"></script>
+</body>
+</html>

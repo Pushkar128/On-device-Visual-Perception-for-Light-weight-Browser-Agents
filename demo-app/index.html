@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ISRO SIH 26171 - Privacy-Preserving Agentic AI Portal</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --primary: #0284c7;
+      --primary-hover: #0369a1;
+      --accent: #6366f1;
+      --danger: #dc2626;
+      --success: #16a34a;
+      --text: #0f172a;
+      --subtext: #475569;
+      --border: #e2e8f0;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 16px;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .brand-subtitle {
+      font-size: 11px;
+      color: var(--subtext);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--subtext);
+      font-weight: 600;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--primary);
+    }
+
+    .badge-sih {
+      background-color: #e0f2fe;
+      color: var(--primary);
+      border: 1px solid #bae6fd;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 48px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background-color: #dbeafe;
+      color: #1e40af;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      margin: 0 0 16px 0;
+      font-size: 32px;
+      color: var(--text);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .hero p {
+      max-width: 750px;
+      margin: 0 auto 30px auto;
+      color: var(--subtext);
+      font-size: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background-color: var(--surface);
+      color: var(--subtext);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background-color: #f1f5f9;
+      color: var(--text);
+    }
+
+    /* Architecture Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background-color: #e0f2fe;
+      color: var(--primary);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 18px;
+    }
+
+    .feature-card h3 {
+      margin: 0 0 10px 0;
+      font-size: 18px;
+      color: var(--text);
+    }
+
+    .feature-card p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--subtext);
+    }
+
+    /* Callout Banner */
+    .cta-banner {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      border-radius: 16px;
+      padding: 40px;
+      color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .cta-banner h2 {
+      margin: 0 0 8px 0;
+      font-size: 24px;
+    }
+
+    .cta-banner p {
+      margin: 0;
+      opacity: 0.9;
+      font-size: 15px;
+    }
+
+    .btn-white {
+      background-color: #ffffff;
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .btn-white:hover {
+      background-color: #f8fafc;
+      transform: translateY(-1px);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 30px 24px;
+      margin-top: 60px;
+    }
+
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--subtext);
+    }
+
+    @media (max-width: 768px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .cta-banner { flex-direction: column; text-align: center; gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <div class="brand-logo">ISRO</div>
+        <div>
+          <div class="brand-title">Agentic AI Portal</div>
+          <div class="brand-subtitle">Indian Space Research Organisation</div>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="form.html">Confidential Form Portal</a></li>
+        <li><a href="metrics.html">SIH PS 26171 Specs</a></li>
+      </ul>
+
+      <span class="badge-sih">SIH 2026 PS 26171</span>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <span class="hero-tag">ISRO SIH 26171 Official Prototype</span>
+      <h1>On-Device Visual Perception for Light-Weight Browser Agents</h1>
+      <p>
+        A client-side privacy agent built for browser environments (Chrome & Firefox). Sensitive credentials, passwords, and PII are redacted on-device using local DOM & visual models before any screen context is sent to central server VLMs.
+      </p>
+      <div style="display: flex; justify-content: center; gap: 16px;">
+        <a href="form.html" class="btn btn-primary">📝 Open Form Test Portal</a>
+        <a href="metrics.html" class="btn btn-secondary">📊 View SIH Evaluation Metrics</a>
+      </div>
+    </section>
+
+    <!-- 3 Core System Components -->
+    <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 24px;">Architecture & Key Capabilities</h2>
+    
+    <div class="features-grid">
+      
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3>1. On-Device Privacy Guard</h3>
+        <p>
+          Manifest V3 extension inspects DOM attributes, input field metadata, and regex patterns to mask password fields, credit card credentials, Aadhaar IDs, and PII directly on user hardware.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🧠</div>
+        <h3>2. Privacy-Preserving VLM Server</h3>
+        <p>
+          FastAPI central server accepts ONLY sanitized/blacked-out screen frames, verifies zero-PII leakage, and determines the next autonomous UI action (click, scroll, type).
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>3. Low-Latency Client Execution</h3>
+        <p>
+          Sub-15ms client processing latency using native WebGL/Canvas APIs to guarantee real-time user assistance without performance degradation.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Call to Action Banner -->
+    <div class="cta-banner">
+      <div>
+        <h2>Ready to Benchmark the Privacy Agent?</h2>
+        <p>Launch the dedicated confidential authentication portal to test live on-device redaction and VLM execution.</p>
+      </div>
+      <a href="form.html" class="btn btn-white">Launch Form Test Portal ➔</a>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div>
+        <strong>ISRO Smart India Hackathon 2026</strong> | Problem Statement 26171
+      </div>
+      <div>
+        Client-Side Privacy Extension • FastAPI VLM Integration
+      </div>
+    </div>
+  </footer>
+
+  <script src="voice_agent.js"></script>
+</body>
+</html>
